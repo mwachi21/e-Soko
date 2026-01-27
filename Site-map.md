@@ -1,9 +1,10 @@
+# e-Soko
 
-Project Name : "";
-
-Front-End : React
+Project Name : "e-Soko";
+Front-End : Svelte
 Backend : Flask
 Database : SQALchemy
+Day Started : 27th/Jan/2026
 
 Mission : Any User To Sell or Buy
 
@@ -21,5 +22,3 @@ Mission : Any User To Sell or Buy
 * Price
 * Description
 * Condition (New, Refurbished, Used)
-
-REF (ref)["https://blog.miguelgrinberg.com/post/create-a-react-flask-project-in-2025"]
