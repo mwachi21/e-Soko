@@ -1,6 +1,6 @@
 # e-Soko
 
-Project Name : "e-Soko"
+Project Name : e-Soko
 Front-End : Svelte
 Backend : Flask
 Database : SQALchemy
