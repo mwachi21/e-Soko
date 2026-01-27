@@ -1,2 +1,2 @@
 # e-Soko
-List Products Online and Sell 
+List Products Online and Sell To Anyone
