@@ -13,5 +13,5 @@ Component-specific images → src/assets/
 - Create your Facebook OAuth Client at [Facebook](https://developers.facebook.com/) by creating an app. Add <http://localhost:5000/facebook/auth/> into Authorized redirect URIs.
 
 ### Refs 
- Blueprints <https://www.geeksforgeeks.org/python/flask-blueprints/>
- Hosting guide (Railway) <https://dev.to/ankur0904/hosting-a-flask-web-server-on-railway-free-1049>
+- Blueprints <https://www.geeksforgeeks.org/python/flask-blueprints/>
+- Hosting guide (Railway) <https://dev.to/ankur0904/hosting-a-flask-web-server-on-railway-free-1049>
