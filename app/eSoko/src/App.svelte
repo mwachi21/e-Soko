@@ -38,10 +38,25 @@
       .then(d => (rand = d));
   }
 
+  // Store the original title
+const originalTitle = document.title;
+
+// Listen for visibility changes
+document.addEventListener("visibilitychange", function () {
+  if (document.visibilityState === "hidden") {
+    // User switched away from the tab
+    document.title = "Come back! 😢";
+  } else {
+    // User returned to the tab
+    document.title = originalTitle;
+  }
+});   
+
 </script>
 
 <h1>Your number is {rand}!</h1>
 <button on:click={getRand}>Get a random number</button>
+
 
 
 <!-- <img src={img} alt="A descriptive alt text" /> -->
