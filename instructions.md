@@ -14,3 +14,4 @@ Component-specific images → src/assets/
 
 ### Refs 
  Blueprints <https://www.geeksforgeeks.org/python/flask-blueprints/>
+ Hosting guide (Railway) <https://dev.to/ankur0904/hosting-a-flask-web-server-on-railway-free-1049>
