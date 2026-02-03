@@ -8,6 +8,7 @@ e-Soko is a lightweight online marketplace for buying and selling new, refurbish
 - Project started: 27 January 2026
 
 ## Mission
+
 Enable anyone to quickly list, discover, and purchase items with a simple, trustworthy experience.
 
 ## Key User Features

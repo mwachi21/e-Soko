@@ -32,7 +32,6 @@ var/
 
 # Installer logs
 pip-log.txt
-pip-delete-this-directory.txt
 
 # Unit test / coverage reports
 htmlcov/
@@ -45,22 +44,11 @@ coverage.xml
 *,cover
 .hypothesis/
 
-# Translations
-*.mo
-*.pot
+
 
 # Flask stuff:
 instance/
 .webassets-cache
-
-# Scrapy stuff:
-.scrapy
-
-# Sphinx documentation
-docs/_build/
-
-# PyBuilder
-target/
 
 # IPython Notebook
 .ipynb_checkpoints
@@ -68,19 +56,16 @@ target/
 # pyenv
 .python-version
 
-# celery beat schedule file
-celerybeat-schedule
-
 # dotenv
 .env
 
 # virtualenv
 venv/
 ENV/
+env.bak/
 
-# Spyder project settings
-.spyderproject
+# Node js
+/eSoko/node_modules/
+/public/build/
 
-# Rope project settings
-.ropeproject
-
+.DS_Store
