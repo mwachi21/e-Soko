@@ -65,7 +65,7 @@ ENV/
 env.bak/
 
 # Node js
-/eSoko/node_modules/
+*node_modules/
 /public/build/
 
 .DS_Store
