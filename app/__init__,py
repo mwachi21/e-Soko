@@ -1,10 +1,10 @@
-from flask import Flask, send_from_directory
-from app.routes.user_routes import user_bp  # Import blueprint
+from flask import Flask
 
 def create_app():
     app = Flask(__name__)
-    
-    # Register blueprint
-    app.register_blueprint(user_bp, url_prefix='/api')
-    
+    app.config.from_object("config")  # this loads configuration from config.py
+
+    from .routes import main as main_blueprint
+    app.register_blueprint(main_blueprint)  # Register main routes
+
     return app

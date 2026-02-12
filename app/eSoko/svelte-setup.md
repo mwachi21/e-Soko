@@ -1,3 +1,5 @@
+# Svelte setup instructions
+
 ## Initialisation
 
 ```bash
@@ -11,6 +13,7 @@ cd eSoko;bun install;bun run build;bun run dev
 ```
 
 To run optimised version of the build
+
 ```bash
 npm run build
 ```

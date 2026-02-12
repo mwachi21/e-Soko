@@ -3,6 +3,16 @@ import random
 
 app = Flask(__name__)
 
+def create_app():
+    app = Flask(__name__)
+    app.config.from_object("config")  # this loads configuration from config.py
+
+    from .routes import main as main_blueprint
+    app.register_blueprint(main_blueprint)  # Register main routes
+
+    return app
+
+
 # Path for our main Svelte page
 @app.route("/")
 def base():
