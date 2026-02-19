@@ -28,6 +28,13 @@
 		}
 	}
 </style> -->
+
+<style>
+  p {
+    color: blue;
+  }
+</style>
+
 <script>
 
 
@@ -52,11 +59,16 @@ document.addEventListener("visibilitychange", function () {
   }
 });   
 
+const theme = new URL(window.location).searchParams.get('theme');
+
+			document.documentElement.classList.remove('light', 'dark');
+			document.documentElement.classList.add(theme || 'light');
+
 </script>
 
 <h1>Your number is {rand}!</h1>
 <button on:click={getRand}>Get a random number</button>
-
-
+<p>Whatsap Sve;te</p>
+% app.svelte %
 
 <!-- <img src={img} alt="A descriptive alt text" /> -->

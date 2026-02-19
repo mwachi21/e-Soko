@@ -1,0 +1,3 @@
+<p>
+    Slider Section
+</p>
