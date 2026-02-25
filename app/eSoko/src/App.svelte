@@ -36,8 +36,8 @@
 </style>
 
 <script>
-
-
+ import Layout from "./components/layout.svelte";
+// import layout from "./components/layout.svelte";
   let rand = 0;
   function getRand() {
     fetch("./rand")
@@ -66,9 +66,12 @@ const theme = new URL(window.location).searchParams.get('theme');
 
 </script>
 
+<layout/>
+
+<Layout/>
 <h1>Your number is {rand}!</h1>
 <button on:click={getRand}>Get a random number</button>
 <p>Whatsap Sve;te</p>
-% app.svelte %
+
 
 <!-- <img src={img} alt="A descriptive alt text" /> -->

@@ -1,3 +1,0 @@
-<p>
-    Slider Section
-</p>
