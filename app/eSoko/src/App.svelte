@@ -59,10 +59,6 @@ document.addEventListener("visibilitychange", function () {
   }
 });   
 
-const theme = new URL(window.location).searchParams.get('theme');
-
-			document.documentElement.classList.remove('light', 'dark');
-			document.documentElement.classList.add(theme || 'light');
 
 </script>
 
