@@ -20,8 +20,8 @@ def create_app():
     GOOGLE_CLIENT_SECRET = os.environ.get('GOOGLE_CLIENT_SECRET', 'placeholder-secret')
     
     # Debug: Print what we're using (remove in production)
-    print(f"DEBUG: Using GOOGLE_CLIENT_ID: {GOOGLE_CLIENT_ID[:20]}..." if len(GOOGLE_CLIENT_ID) > 20 else f"DEBUG: Using GOOGLE_CLIENT_ID: {GOOGLE_CLIENT_ID}")
-    print(f"DEBUG: Using GOOGLE_CLIENT_SECRET: {'*' * len(GOOGLE_CLIENT_SECRET)}")
+   # print(f"DEBUG: Using GOOGLE_CLIENT_ID: {GOOGLE_CLIENT_ID[:20]}..." if len(GOOGLE_CLIENT_ID) > 20 else f"DEBUG: Using GOOGLE_CLIENT_ID: {GOOGLE_CLIENT_ID}")
+   # print(f"DEBUG: Using GOOGLE_CLIENT_SECRET: {'*' * len(GOOGLE_CLIENT_SECRET)}")
     
     oauth.register(
         name='google',
