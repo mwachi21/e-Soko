@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Home - BlkMkt{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+Hi {{ user.username }}!
+    <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Log Out</button>
+    </form>
+    <p><a href="{% url 'password_change' %}">Password Change</a></p>
+
+{% else %}
+
+  <p>Welcome to BlkMkt! <br> Please  <a href="{% url 'login' %}">log in</a> to access the marketplace.</p>
+  <p><a href="{% url 'password_reset' %}">Forgot Password ?</a></p>
+  Or, if you don't have an account, <a href="{% url 'signup' %}">sign up</a> to get started.
+{% endif %}
+{% endblock %}

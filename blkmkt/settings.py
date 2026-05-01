@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blkmkt',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -41,7 +42,7 @@ ROOT_URLCONF = 'blkmkt.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': [BASE_DIR / 'templates'], #Added templates DIR
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -93,3 +94,8 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_REDIRECT_URL = "home"  # Login Redirect To Homepage
+LOGOUT_REDIRECT_URL = "home"  # Logout Redirect To Login Page
+
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend" # new
