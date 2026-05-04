@@ -3,6 +3,7 @@ Django settings for blkmkt project.
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -62,6 +63,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+        'OPTIONS': {
+            'timeout': 20,  #TIME IN SECONDS
+        },
     }
 }
 
@@ -92,6 +96,9 @@ STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -99,3 +106,5 @@ LOGIN_REDIRECT_URL = "home"  # Login Redirect To Homepage
 LOGOUT_REDIRECT_URL = "home"  # Logout Redirect To Login Page
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend" # new
+
+# STATIC_URL = ''

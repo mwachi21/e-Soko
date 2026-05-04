@@ -32,6 +32,11 @@ python manage.py createsuperuser
 python manage.py startapp accounts
 ```
 
-## Login Guide
+## Guides References
+###  Create Account, User Login, Change Password, Create Super User
 
-[https://learndjango.com/tutorials/django-login-and-logout-tutorial#password-change](Login)
+[Learn Django](https://learndjango.com/tutorials/django-login-and-logout-tutorial#password-change)
+
+### Profile Picture guide
+
+[Medium](https://medium.com/jungletronics/a-django-blog-in-vs-code-6dee94cec9c0)

@@ -1,16 +1,18 @@
 <!DOCTYPE html>
-<html>
+{% load static %}
+<html lang="en">
 
 <head>
+  <link rel="stylesheet" href="{% static 'css/app.css' %}">
   <meta charset="utf-8">
+  <script src="{% static 'js/main.js' %}"></script>
   <title>{% block title %}Template{% endblock %}</title>
 </head>
 
 <body>
-  <main>
+  <div class="greeting">Holaaaaaaaaa</div>
     {% block content %}
     {% endblock %}
-  </main>
 </body>
-
+&copy; 2026
 </html>
