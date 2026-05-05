@@ -1,14 +1,25 @@
 {% extends "base.html" %}
+{% load widget_tweaks %}
+
 
 {% block title %}Sign Up - BlkMkt{% endblock %}
 
 {% block content %}
 
 <h2>Sign up</h2>
+
+
 <form method="post">
   {% csrf_token %}
-  {{ form }}
-  <button type="submit">Sign Up</button>
+
+  {% comment %} {{ form.username }} {% endcomment %}
+  {% render_field form.username class="form-control " placeholder="Username" %}
+
+  {% render_field form.email class="form-control" placeholder="Enter Email" %}
+  {% render_field form.password1 class="form-control" placeholder="Enter Password" %}
+  {% render_field form.password2 class="form-control" placeholder="Confirm Password" %}
+
+  <button class="btn btn-soft btn-success" type="submit">Sign Up</button>
 </form>
-Or <a href="{% url 'login' %}">Login</a> If You Already Registered
+Or <a href="{% url 'login' %}" class="btn btn-link">Login</a> If You Already Registered
 {% endblock %}

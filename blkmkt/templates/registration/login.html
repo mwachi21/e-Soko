@@ -8,8 +8,8 @@
 <form method="post">
   {% csrf_token %}
   {{ form }}
-  <button type="submit">Log In</button>
+  <button class="btn btn-soft btn-success" type="submit">Log In</button>
 </form>
 
-<p>Don't have an account? <a href="{% url 'signup' %}">Sign up</a>.</p>
+<p>Don't have an account? <a class="btn btn-link" href="{% url 'signup' %}">Sign up</a>.</p>
 {% endblock %}

@@ -1,1 +1,1 @@
-document.write("Hello Js World!");
+// document.write("Hello Js World!");
