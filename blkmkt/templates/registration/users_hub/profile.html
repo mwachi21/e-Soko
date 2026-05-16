@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="content-section">
+    <div class="media">
+      <img class="w-32 h-32 md:h-auto rounded-full" src="{{ user.profile.image.url }}">
+      <div class="media-body">
+        <h2 class="account-heading">Username: {{ user.username }}</h2>
+        <p class="text-secondary">Email: {{ user.email }}</p>
+      </div>
+    </div>
+    <!-- FORM GOES HERE -->
+</div>   
+
+<!--
+and here we can add a form to update the profile information,
+such as username, email, and profile picture. We can also include a link to change the password
+and a logout button for the user to easily log out of their account. -->
+
+{% endblock content %}

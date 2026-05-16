@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise Slider UI - Working Logic</title>
+    <style>
+        :root {
+            --brand-purple: #3B0066;
+            --light-gray: #E0E0E0;
+            --text-dark: #1A1A1A;
+            --text-muted: #555555;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 40px;
+            background-color: #f9f9f9;
+        }
+
+        .slider-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* --- Slide Track & Absolute Layers --- */
+        .slide-track {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* --- Overlay Hero Box --- */
+        .slide-card {
+            position: absolute;
+            left: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            width: 350px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .slide-card h2 {
+            color: var(--brand-purple);
+            margin: 0 0 16px 0;
+            font-size: 28px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .slide-card p {
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.5;
+            margin: 0 0 24px 0;
+        }
+
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            background-color: var(--brand-purple);
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: opacity 0.2s ease;
+        }
+
+        .cta-btn:hover {
+            opacity: 0.9;
+        }
+
+        .cta-btn span {
+            margin-right: 8px;
+        }
+
+        /* --- Custom Controls Layout --- */
+        .slider-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 24px;
+            padding: 0 10px;
+        }
+
+        .controls-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .controls-right {
+            display: flex;
+            gap: 12px;
+        }
+
+        /* Playback Button */
+        .pause-btn {
+            background: none;
+            border: 2px solid var(--light-gray);
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--text-dark);
+            transition: all 0.2s ease;
+        }
+
+        .pause-btn:hover {
+            border-color: var(--text-dark);
+        }
+
+        /* Dynamic Indicators Container */
+        .indicator-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* The Pill Shape */
+        .progress-capsule {
+            width: 48px;
+            height: 8px;
+            background-color: var(--light-gray);
+            border-radius: 50px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 100%;
+            background-color: #8A4FFF;
+            border-radius: 50px;
+            transform: scaleX(0);
+            transform-origin: left;
+        }
+
+        /* Standard Dots */
+        .dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--light-gray);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .dot:hover {
+            background-color: #B0B0B0;
+        }
+
+        /* Arrow Navigation Buttons */
+        .arrow-btn {
+            background: none;
+            border: 1px solid var(--light-gray);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--text-dark);
+            transition: all 0.2s ease;
+        }
+
+        .arrow-btn:hover {
+            border-color: var(--text-dark);
+            background-color: rgba(0,0,0,0.02);
+        }
+
+        .arrow-btn svg {
+            width: 16px;
+            height: 16px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+    </style>
+</head>
+<body>
+
+<div class="slider-container">
+    <!-- Main Carousel Display with 3 Test Slides -->
+    <div class="slide-track">
+        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1449034446853-66c86144b0ad?ixlib=rb-4.1.0');">
+            <div class="slide-card">
+                <h2>Enterprise Cloud ERP</h2>
+                <p>Unify core business operations and boost efficiency with a composable, AI-powered system built for your sector.</p>
+                <a href="#" class="cta-btn"><span>Learn more</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+            </div>
+        </div>
+
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1526779259212-939e64788e3c?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDEwfHx8ZW58MHx8fHx8');">
+            <div class="slide-card">
+                <h2>Asset Management</h2>
+                <p>Maximize your product uptime and refine asset lifecycles across deep industrial value chains seamlessly.</p>
+                <a href="#" class="cta-btn"><span>Discover EAM</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+            </div>
+        </div>
+
+        <div class="slide" style="background-image: url('https://unsplash.com');">
+            <div class="slide-card">
+                <h2>Service Experience</h2>
+                <p>Delight customers out in the field by optimizing resource scheduling and delivery logistics instantly.</p>
+                <a href="#" class="cta-btn"><span>Explore FSM</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Bottom Navigation Dashboard -->
+    <div class="slider-controls">
+        <div class="controls-left">
+            <button class="pause-btn" id="pauseBtn" aria-label="Pause slideshow">
+                <svg width="12" height="14" viewBox="0 0 24 24" fill="currentColor"><rect x="4" y="4" width="4" height="16"></rect><rect x="16" y="4" width="4" height="16"></rect></svg>
+            </button>
+            <div class="indicator-group" id="indicatorGroup">
+                <!-- Indicators are automatically injected and handled by JS below -->
+            </div>
+        </div>
+
+        <div class="controls-right">
+            <button class="arrow-btn" id="prevBtn" aria-label="Previous slide">
+                <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <button class="arrow-btn" id="nextBtn" aria-label="Next slide">
+                <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+    const slides = document.querySelectorAll('.slide');
+    const indicatorGroup = document.getElementById('indicatorGroup');
+    const pauseBtn = document.getElementById('pauseBtn');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    let currentIndex = 0;
+    let isPaused = false;
+    let slideInterval;
+    let startTime;
+    let elapsedTime = 0;
+    const duration = 5000; // 5 seconds per slide
+
+    // 1. Build out the navigation architecture dynamically based on slide count
+    function createIndicators() {
+        indicatorGroup.innerHTML = '';
+        slides.forEach((_, index) => {
+            if (index === currentIndex) {
+                const capsule = document.createElement('div');
+                capsule.className = 'progress-capsule';
+                const fill = document.createElement('div');
+                fill.className = 'progress-fill';
+                fill.id = 'progressBar';
+                capsule.appendChild(fill);
+                indicatorGroup.appendChild(capsule);
+            } else {
+                const dot = document.createElement('div');
+                dot.className = 'dot';
+                dot.addEventListener('click', () => goToSlide(index));
+                indicatorGroup.appendChild(dot);
+            }
+        });
+    }
+
+    // 2. Control slide rendering updates
+    function updateSlides() {
+        slides.forEach((slide, index) => {
+            if (index === currentIndex) {
+                slide.classList.add('active');
+            } else {
+                slide.classList.remove('active');
+            }
+        });
+        createIndicators();
+        resetAndStartTimer();
+    }
+
+    // 3. Main JS Timer Loop Logic (Replaced standard CSS keyframes for control tracking)
+    function tick() {
+        if (!isPaused) {
+            elapsedTime = Date.now() - startTime;
+            const progress = Math.min(elapsedTime / duration, 1);
+            const progressBar = document.getElementById('progressBar');
+            if (progressBar) {
+                progressBar.style.transform = `scaleX(${progress})`;
+            }
+
+            if (elapsedTime >= duration) {
+                nextSlide();
+            } else {
+                slideInterval = requestAnimationFrame(tick);
+            }
+        }
+    }
+
+    function resetAndStartTimer() {
+        cancelAnimationFrame(slideInterval);
+        elapsedTime = 0;
+        startTime = Date.now();
+        if (!isPaused) {
+            slideInterval = requestAnimationFrame(tick);
+        }
+    }
+
+    // 4. Navigation Action Hook APIs
+    function nextSlide() {
+        currentIndex = (currentIndex + 1) % slides.length;
+        updateSlides();
+    }
+
+    function prevSlide() {
+        currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+        updateSlides();
+    }
+
+    function goToSlide(index) {
+        currentIndex = index;
+        updateSlides();
+    }
+
+    // 5. Event Listeners
+    nextBtn.addEventListener('click', nextSlide);
+    prevBtn.addEventListener('click', prevSlide);
+
+    pauseBtn.addEventListener('click', () => {
+        isPaused = !isPaused;
+        if (isPaused) {
+            cancelAnimationFrame(slideInterval);
+            pauseBtn.innerHTML = '<svg width="12" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>';
+            pauseBtn.setAttribute('aria-label', 'Play slideshow');
+        } else {
+            startTime = Date.now() - elapsedTime; // Resume exactly where it was paused
+            slideInterval = requestAnimationFrame(tick);
+            pauseBtn.innerHTML = '<svg width="12" height="14" viewBox="0 0 24 24" fill="currentColor"><rect x="4" y="4" width="4" height="16"></rect><rect x="16" y="4" width="4" height="16"></rect></svg>';
+            pauseBtn.setAttribute('aria-label', 'Pause slideshow');
+        }
+    });
+
+    // Fire off initialization
+    updateSlides();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Home - BlkMkt{% endblock %}
+
+{% block content %}
+
+<div class="hero bg-base-200 min-h-screen">
+  <div class="hero-content text-center">
+    <div class="max-w-md">
+      <h1 class="text-5xl font-bold">Welcome to BlkMkt!</h1>
+      <p class="py-6">
+        Your one-stop Uderground Marketplace  to Sell or Buy your products and enjoy a seamless shopping experience.</p>
+{% if user.is_authenticated %}</p>
+Hi {{ user.username }}!
+    <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <img class="w-32 h-32 md:h-auto rounded-full" src="{{ user.profile.image.url }}">
+        <button class="btn btn-error">Log Out</button>
+    </form>
+    <a class="btn btn-link" href="{% url 'password_change' %}">Password Change</a>
+
+{% else %}
+
+  <p class="p-5">Please  <a class="btn btn-link" href="{% url 'login' %}">log in</a> to access the marketplace.
+  <a class="btn btn-link" href="{% url 'password_reset' %}">Forgot Password ?</a>
+  Or, if you don't have an account, 
+</p>
+    <form action="{% url 'signup' %}">
+    <button class="btn btn-accent" href="{% url 'signup' %}">Get Started</button>
+    </form>
+      
+    </div>
+  </div>
+</div>
+
+{% endif %}
+{% endblock %}
